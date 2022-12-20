@@ -2,12 +2,16 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
+using System.IO;
+using System.Linq;
 using System.Reflection;
 
 namespace YandexSpeechKitSynthClient.Api;
 
 public class Startup
 {
+    private const string STATIC_FILES_PATH = "wwwroot";
+
     private readonly IConfiguration _configuration;
 
     public Startup(IConfiguration configuration)
@@ -27,22 +31,29 @@ public class Startup
 
     public void Configure(IApplicationBuilder app)
     {
-        var provider = new ManifestEmbeddedFileProvider(Assembly.GetAssembly(type: typeof(Startup)), "wwwroot");
-        var staticFileOptions = new StaticFileOptions
-        {
-            FileProvider = provider,
-            RequestPath = "",
-        };
-
-        app.UseSpa(spaBuilder =>
-        {
-            spaBuilder.Options.DefaultPageStaticFileOptions = staticFileOptions;
-        });
-
-        app.UseSpaStaticFiles(staticFileOptions);
+        ConfigureEmbeddedAssets(app);
         app.UseRouting().UseEndpoints(endpoints =>
         {
             endpoints.MapDefaultControllerRoute();
         });
+    }
+
+    private static void ConfigureEmbeddedAssets(IApplicationBuilder app)
+    {
+        if (Directory.EnumerateFiles(STATIC_FILES_PATH).Any())
+        {
+            var manifestEmbeddedFileProvider = new ManifestEmbeddedFileProvider(
+                Assembly.GetExecutingAssembly(),
+                STATIC_FILES_PATH);
+
+            var staticFileOptions = new StaticFileOptions
+            {
+                FileProvider = manifestEmbeddedFileProvider,
+                RequestPath = string.Empty,
+            };
+
+            app.UseSpaStaticFiles(staticFileOptions);
+            app.UseSpa(spaBuilder => spaBuilder.Options.DefaultPageStaticFileOptions = staticFileOptions);
+        }
     }
 }
