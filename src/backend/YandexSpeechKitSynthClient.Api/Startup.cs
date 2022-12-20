@@ -31,7 +31,9 @@ public class Startup
 
     public void Configure(IApplicationBuilder app)
     {
+#if !DEBUG
         ConfigureEmbeddedAssets(app);
+#endif
         app.UseRouting().UseEndpoints(endpoints =>
         {
             endpoints.MapDefaultControllerRoute();
@@ -40,20 +42,17 @@ public class Startup
 
     private static void ConfigureEmbeddedAssets(IApplicationBuilder app)
     {
-        if (Directory.EnumerateFiles(STATIC_FILES_PATH).Any())
+        var manifestEmbeddedFileProvider = new ManifestEmbeddedFileProvider(
+            Assembly.GetExecutingAssembly(),
+            STATIC_FILES_PATH);
+
+        var staticFileOptions = new StaticFileOptions
         {
-            var manifestEmbeddedFileProvider = new ManifestEmbeddedFileProvider(
-                Assembly.GetExecutingAssembly(),
-                STATIC_FILES_PATH);
+            FileProvider = manifestEmbeddedFileProvider,
+            RequestPath = string.Empty,
+        };
 
-            var staticFileOptions = new StaticFileOptions
-            {
-                FileProvider = manifestEmbeddedFileProvider,
-                RequestPath = string.Empty,
-            };
-
-            app.UseSpaStaticFiles(staticFileOptions);
-            app.UseSpa(spaBuilder => spaBuilder.Options.DefaultPageStaticFileOptions = staticFileOptions);
-        }
+        app.UseSpaStaticFiles(staticFileOptions);
+        app.UseSpa(spaBuilder => spaBuilder.Options.DefaultPageStaticFileOptions = staticFileOptions);
     }
 }
