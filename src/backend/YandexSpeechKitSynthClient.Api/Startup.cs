@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 
@@ -26,7 +26,8 @@ public class Startup
             .AddControllers();
 
         services
-            .AddLogging();
+            .AddLogging()
+            .AddHostedService<ConsoleGuiHostedService>();
     }
 
     public void Configure(IApplicationBuilder app)
@@ -40,6 +41,7 @@ public class Startup
         });
     }
 
+#pragma warning disable IDE0051 // Remove unused private members
     private static void ConfigureEmbeddedAssets(IApplicationBuilder app)
     {
         var manifestEmbeddedFileProvider = new ManifestEmbeddedFileProvider(
@@ -55,4 +57,5 @@ public class Startup
         app.UseSpaStaticFiles(staticFileOptions);
         app.UseSpa(spaBuilder => spaBuilder.Options.DefaultPageStaticFileOptions = staticFileOptions);
     }
+#pragma warning restore IDE0051 // Remove unused private members
 }
