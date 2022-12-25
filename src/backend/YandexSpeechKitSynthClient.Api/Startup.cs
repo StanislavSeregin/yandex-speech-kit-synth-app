@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using MediatR;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using System.Reflection;
 using YandexSpeechKitSynthClient.Data;
+using YandexSpeechKitSynthClient.YandexClient;
 
 namespace YandexSpeechKitSynthClient.Api;
 
@@ -27,7 +29,10 @@ public class Startup
         services
             .AddLogging()
             .AddHostedService<ConsoleGuiHostedService>()
-            .AddLiteDbContext();
+            .AddHostedService<CheckSettingsHostedService>()
+            .AddLiteDbContext()
+            .AddYandexClient(_configuration, "YandexClient")
+            .AddMediatR(typeof(Startup));
     }
 
     public void Configure(IApplicationBuilder app)

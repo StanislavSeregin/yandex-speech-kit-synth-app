@@ -11,6 +11,7 @@ WORKDIR /src
 COPY src/backend/*.sln .
 COPY src/backend/YandexSpeechKitSynthClient.Api/*.csproj ./YandexSpeechKitSynthClient.Api/
 COPY src/backend/YandexSpeechKitSynthClient.Data/*.csproj ./YandexSpeechKitSynthClient.Data/
+COPY src/backend/YandexSpeechKitSynthClient.YandexClient/*.csproj ./YandexSpeechKitSynthClient.YandexClient/
 RUN dotnet restore -r $RUNTIME -p:PublishReadyToRun=true
 
 # Build web app

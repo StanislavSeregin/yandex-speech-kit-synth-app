@@ -1,12 +1,11 @@
 ﻿using LiteDB;
 using System;
 
-namespace YandexSpeechKitSynthClient.Data
-{
-    public interface ILiteDbContext : IDisposable
-    {
-        ILiteCollection<T> GetCollection<T>();
+namespace YandexSpeechKitSynthClient.Data;
 
-        ILiteStorage<Guid> GetStorage();
-    }
+public interface ILiteDbContext : IDisposable
+{
+    ILiteCollection<T> GetCollection<T>();
+
+    ILiteStorage<Guid> GetStorage();
 }

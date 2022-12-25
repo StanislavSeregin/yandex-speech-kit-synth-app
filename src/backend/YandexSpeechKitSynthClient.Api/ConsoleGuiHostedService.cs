@@ -59,7 +59,7 @@ internal class MainWindow : Window
         Height = 1,
         X = Pos.Center(),
         Y = Pos.Center(),
-        Text = "YandexSpeechKitSynthClient"
+        Text = "Yandex SpeechKit Text2Speech"
     };
 
     private readonly Button _button = new()
