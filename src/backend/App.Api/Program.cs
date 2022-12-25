@@ -7,14 +7,14 @@ namespace App.Api;
 
 internal class Program
 {
-    public const string SettingsName = "appsettings.json";
+    public const string SETTINGS_NAME = "appsettings.json";
 
     public static Task Main(string[] args)
     {
         return Host.CreateDefaultBuilder(args)
             .ConfigureAppConfiguration(builder => builder
                 .AddJsonFile(
-                    SettingsName,
+                    SETTINGS_NAME,
                     optional: true,
                     reloadOnChange: true))
             .ConfigureWebHostDefaults(builder => builder

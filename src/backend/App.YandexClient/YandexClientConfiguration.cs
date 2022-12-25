@@ -2,7 +2,7 @@
 
 namespace App.YandexClient;
 
-internal class YandexClientConfiguration
+public class YandexClientConfiguration
 {
     public string ApiKey { get; } = string.Empty;
 

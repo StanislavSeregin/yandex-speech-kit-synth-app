@@ -11,7 +11,8 @@ namespace App.Api;
 
 public class Startup
 {
-    private const string STATIC_FILES_PATH = "wwwroot";
+    public const string STATIC_FILES_PATH = "wwwroot";
+    public const string YANDEX_CLIENT_CONFIGURATION_KEY = "YandexClientSettings";
 
     private readonly IConfiguration _configuration;
 
@@ -29,9 +30,9 @@ public class Startup
         services
             .AddLogging()
             .AddHostedService<ConsoleGuiHostedService>()
-            .AddHostedService<CheckSettingsHostedService>()
+            .AddHostedService<InitAppSettingsHostedService>()
             .AddLiteDbContext()
-            .AddYandexClient(_configuration, "YandexClient")
+            .AddYandexClient(_configuration, YANDEX_CLIENT_CONFIGURATION_KEY)
             .AddMediatR(typeof(Startup));
     }
 
