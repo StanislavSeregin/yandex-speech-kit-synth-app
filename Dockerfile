@@ -10,7 +10,8 @@ ARG RUNTIME=win-x64
 WORKDIR /src
 COPY src/backend/*.sln .
 COPY src/backend/YandexSpeechKitSynthClient.Api/*.csproj ./YandexSpeechKitSynthClient.Api/
-RUN dotnet restore -r $RUNTIME
+COPY src/backend/YandexSpeechKitSynthClient.Data/*.csproj ./YandexSpeechKitSynthClient.Data/
+RUN dotnet restore -r $RUNTIME -p:PublishReadyToRun=true
 
 # Build web app
 FROM web-dependencies as web-build
@@ -23,7 +24,7 @@ ARG RUNTIME=win-x64
 COPY src/backend/ .
 WORKDIR /src/YandexSpeechKitSynthClient.Api
 COPY --from=web-build /src/dist ./wwwroot/
-RUN dotnet publish -c release -o /app -r $RUNTIME -p:PublishSingleFile=true --self-contained true --no-restore
+RUN dotnet publish -c release -o /app -r $RUNTIME -p:PublishSingleFile=true -p:PublishTrimmed=true -p:PublishReadyToRun=true --self-contained true --no-restore
 
 # Copy compiled app to local folder
 FROM scratch AS export-stage

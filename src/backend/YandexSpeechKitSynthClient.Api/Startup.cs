@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
-using System.Linq;
 using System.Reflection;
+using YandexSpeechKitSynthClient.Data;
 
 namespace YandexSpeechKitSynthClient.Api;
 
@@ -27,7 +26,8 @@ public class Startup
 
         services
             .AddLogging()
-            .AddHostedService<ConsoleGuiHostedService>();
+            .AddHostedService<ConsoleGuiHostedService>()
+            .AddLiteDbContext();
     }
 
     public void Configure(IApplicationBuilder app)

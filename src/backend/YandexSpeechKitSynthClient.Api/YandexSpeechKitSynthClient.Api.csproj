@@ -15,4 +15,8 @@
 		<EmbeddedResource Include="wwwroot\**" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\YandexSpeechKitSynthClient.Data\YandexSpeechKitSynthClient.Data.csproj" />
+	</ItemGroup>
+
 </Project>
