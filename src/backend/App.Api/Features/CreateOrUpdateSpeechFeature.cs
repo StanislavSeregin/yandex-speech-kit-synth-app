@@ -39,6 +39,17 @@ public static class CreateOrUpdateSpeechFeature
                 throw new ArgumentException($"{nameof(request.Transcription)} should not be empty");
             }
 
+            var speechCollection = _liteDbContext.GetCollection<Speech>();
+            var speech = speechCollection
+                .Query()
+                .Where(speech => speech.Text == request.Text)
+                .FirstOrDefault();
+
+            if (speech?.Transcription == request.Transcription)
+            {
+                return new Response(SpeechModel.Map(speech));
+            }
+
             var storage = _liteDbContext.GetStorage();
             var fileId = Guid.NewGuid();
             await using var speechStream = await _yandexClient.TextToSpeechInRussian(
@@ -49,12 +60,6 @@ public static class CreateOrUpdateSpeechFeature
                 fileId,
                 fileId.ToString(),
                 speechStream);
-
-            var speechCollection = _liteDbContext.GetCollection<Speech>();
-            var speech = speechCollection
-                .Query()
-                .Where(speech => speech.Text == request.Text)
-                .FirstOrDefault();
 
             var speechToUpsert = speech is not null
                 ? speech with
