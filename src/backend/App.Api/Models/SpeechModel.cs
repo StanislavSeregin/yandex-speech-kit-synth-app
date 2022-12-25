@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace YandexSpeechKitSynthClient.Api.Models;
+namespace App.Api.Models;
 
 public class SpeechModel
 {

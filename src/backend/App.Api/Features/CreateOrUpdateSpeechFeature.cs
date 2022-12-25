@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
-using YandexSpeechKitSynthClient.Data;
-using YandexSpeechKitSynthClient.Api.Models;
+using App.Data;
+using App.Api.Models;
 
-namespace YandexSpeechKitSynthClient.Api.Features;
+namespace App.Api.Features;
 
 public static class CreateOrUpdateSpeechFeature
 {

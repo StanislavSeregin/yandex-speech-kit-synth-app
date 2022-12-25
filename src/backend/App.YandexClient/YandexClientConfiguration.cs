@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace YandexSpeechKitSynthClient.YandexClient;
+namespace App.YandexClient;
 
 internal class YandexClientConfiguration
 {

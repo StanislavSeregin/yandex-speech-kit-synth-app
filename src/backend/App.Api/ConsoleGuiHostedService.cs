@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Terminal.Gui;
 
-namespace YandexSpeechKitSynthClient.Api;
+namespace App.Api;
 
 public class ConsoleGuiHostedService : BackgroundService
 {

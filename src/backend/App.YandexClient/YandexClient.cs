@@ -6,7 +6,7 @@ using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace YandexSpeechKitSynthClient.YandexClient;
+namespace App.YandexClient;
 
 internal class YandexClient : IYandexClient
 {

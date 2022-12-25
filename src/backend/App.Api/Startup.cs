@@ -4,10 +4,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using System.Reflection;
-using YandexSpeechKitSynthClient.Data;
-using YandexSpeechKitSynthClient.YandexClient;
+using App.Data;
+using App.YandexClient;
 
-namespace YandexSpeechKitSynthClient.Api;
+namespace App.Api;
 
 public class Startup
 {

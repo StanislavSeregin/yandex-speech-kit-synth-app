@@ -9,9 +9,9 @@ FROM mcr.microsoft.com/dotnet/sdk:7.0 AS backend-dependencies
 ARG RUNTIME=win-x64
 WORKDIR /src
 COPY src/backend/*.sln .
-COPY src/backend/YandexSpeechKitSynthClient.Api/*.csproj ./YandexSpeechKitSynthClient.Api/
-COPY src/backend/YandexSpeechKitSynthClient.Data/*.csproj ./YandexSpeechKitSynthClient.Data/
-COPY src/backend/YandexSpeechKitSynthClient.YandexClient/*.csproj ./YandexSpeechKitSynthClient.YandexClient/
+COPY src/backend/App.Api/*.csproj ./App.Api/
+COPY src/backend/App.Data/*.csproj ./App.Data/
+COPY src/backend/App.YandexClient/*.csproj ./App.YandexClient/
 RUN dotnet restore -r $RUNTIME -p:PublishReadyToRun=true
 
 # Build web app
@@ -23,10 +23,10 @@ RUN npm run build
 FROM backend-dependencies AS backend-build
 ARG RUNTIME=win-x64
 COPY src/backend/ .
-WORKDIR /src/YandexSpeechKitSynthClient.Api
+WORKDIR /src/App.Api
 COPY --from=web-build /src/dist ./wwwroot/
 RUN dotnet publish -c release -o /app -r $RUNTIME -p:PublishSingleFile=true -p:PublishTrimmed=true -p:PublishReadyToRun=true --self-contained true --no-restore
 
 # Copy compiled app to local folder
 FROM scratch AS export-stage
-COPY --from=backend-build /app/YandexSpeechKitSynthClient.Api* .
+COPY --from=backend-build /app/App.Api* .

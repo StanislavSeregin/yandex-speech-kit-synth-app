@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace YandexSpeechKitSynthClient.YandexClient;
+namespace App.YandexClient;
 
 public interface IYandexClient
 {

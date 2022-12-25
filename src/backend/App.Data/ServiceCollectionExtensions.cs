@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace YandexSpeechKitSynthClient.Data;
+namespace App.Data;
 
 public static class ServiceCollectionExtensions
 {

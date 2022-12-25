@@ -1,6 +1,10 @@
-# Yandex SpeechKit synthesizer client
+# Yandex SpeechKit synth app
 
-## Build single selfhosted app to `./release-build` via docker for:
+Cross-platform app for text-to-speech using yandex api.
+
+## How to build
+
+### Run shell command (docker required):
 
 - Windows
 
@@ -19,3 +23,8 @@ docker build --file Dockerfile --output release-build --build-arg RUNTIME=linux-
 ```bash
 docker build --file Dockerfile --output release-build --build-arg RUNTIME=osx-x64 .
 ```
+
+## How to use
+
+- Run `./release-build/App.Api.exe` or `./release-build/App.Api` app
+- Press `Web GUI` button to open

@@ -4,7 +4,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace YandexSpeechKitSynthClient.Api;
+namespace App.Api;
 
 public class CheckSettingsHostedService : BackgroundService
 {

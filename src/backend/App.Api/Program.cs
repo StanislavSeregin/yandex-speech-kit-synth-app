@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System.Threading.Tasks;
 
-namespace YandexSpeechKitSynthClient.Api;
+namespace App.Api;
 
 internal class Program
 {

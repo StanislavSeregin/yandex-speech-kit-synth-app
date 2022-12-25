@@ -1,7 +1,7 @@
 ﻿using LiteDB;
 using System;
 
-namespace YandexSpeechKitSynthClient.Data;
+namespace App.Data;
 
 public interface ILiteDbContext : IDisposable
 {

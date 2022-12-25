@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.Reflection;
 
-namespace YandexSpeechKitSynthClient.Data;
+namespace App.Data;
 
 internal class LiteDbContext : ILiteDbContext, IDisposable
 {

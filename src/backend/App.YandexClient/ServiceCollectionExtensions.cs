@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
 
-namespace YandexSpeechKitSynthClient.YandexClient;
+namespace App.YandexClient;
 
 public static class ServiceCollectionExtensions
 {

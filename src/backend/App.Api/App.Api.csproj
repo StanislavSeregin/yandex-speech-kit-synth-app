@@ -17,8 +17,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\YandexSpeechKitSynthClient.Data\YandexSpeechKitSynthClient.Data.csproj" />
-	  <ProjectReference Include="..\YandexSpeechKitSynthClient.YandexClient\YandexSpeechKitSynthClient.YandexClient.csproj" />
+	  <ProjectReference Include="..\App.Data\App.Data.csproj" />
+	  <ProjectReference Include="..\App.YandexClient\App.YandexClient.csproj" />
 	</ItemGroup>
 
 </Project>
