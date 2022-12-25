@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Terminal.Gui;
 
-namespace App.Api;
+namespace App.Api.HostedServices;
 
 public class ConsoleGuiHostedService : BackgroundService
 {

@@ -6,7 +6,7 @@ using System.Text.Json.Nodes;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace App.Api;
+namespace App.Api.HostedServices;
 
 public class InitAppSettingsHostedService : BackgroundService
 {
@@ -24,7 +24,6 @@ public class InitAppSettingsHostedService : BackgroundService
 
         await using var file = File.Create(Program.SETTINGS_NAME);
         await using var writer = new Utf8JsonWriter(file, new JsonWriterOptions { Indented = true });
-        var jsonSerializerOptions = new JsonSerializerOptions() { WriteIndented = true };
         jObject.WriteTo(writer);
     }
 }

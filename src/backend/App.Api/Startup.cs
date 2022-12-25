@@ -6,6 +6,7 @@ using Microsoft.Extensions.FileProviders;
 using System.Reflection;
 using App.Data;
 using App.YandexClient;
+using App.Api.HostedServices;
 
 namespace App.Api;
 
