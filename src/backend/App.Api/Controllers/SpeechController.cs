@@ -19,7 +19,7 @@ public class SpeechController : ControllerBase
     }
 
     [HttpGet("file")]
-    public async Task<IActionResult> GetVoiceList(
+    public async Task<IActionResult> GetSpeechFile(
         [FromQuery] Guid fileId,
         CancellationToken cancellationToken)
     {
@@ -29,7 +29,7 @@ public class SpeechController : ControllerBase
     }
 
     [HttpPost("get-list")]
-    public async Task<IActionResult> GetVoiceList(
+    public async Task<IActionResult> GetSpeechList(
         [FromBody] GettingSpeechListFeature.Request request,
         CancellationToken cancellationToken)
     {
@@ -38,7 +38,7 @@ public class SpeechController : ControllerBase
     }
 
     [HttpPost("create-or-update")]
-    public async Task<IActionResult> CreateOrUpdateVoice(
+    public async Task<IActionResult> CreateOrUpdateSpeech(
         [FromBody] CreateOrUpdateSpeechFeature.Request request,
         CancellationToken cancellationToken)
     {
@@ -47,7 +47,7 @@ public class SpeechController : ControllerBase
     }
 
     [HttpPost("remove")]
-    public async Task<IActionResult> RemoveVoice(
+    public async Task<IActionResult> RemoveSpeech(
         [FromBody] RemoveSpeechFeature.Request request,
         CancellationToken cancellationToken)
     {

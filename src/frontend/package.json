@@ -2,10 +2,8 @@
   "name": "frontend",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --output-path ./dist",
-    "watch": "ng build --watch --configuration development"
+    "debug": "ng serve --configuration development",
+    "build": "ng build --output-path ./dist"
   },
   "private": true,
   "dependencies": {

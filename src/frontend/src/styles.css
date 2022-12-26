@@ -1,1 +1,87 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    background-color: #eeeeee;
+  }
+  
+  html, body { height: 100%; }
+  body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+  
+  .background-red {
+    background-color: rgb(153, 50, 50);
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  .node circle {
+    fill: #999;
+  }
+  
+  .node text {
+    font: 12px sans-serif;
+  }
+  
+  .node--internal circle {
+    fill: #555;
+  }
+  
+  .node--internal text {
+    text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+  }
+  
+  .link {
+    fill: none;
+    stroke: #555;
+    stroke-opacity: 0.4;
+    stroke-width: 1.5px;
+  }
+  
+  .item {
+    padding: 10px;
+  }
+  
+  mat-form-field {
+    width: 100%;
+  }
+  
+  .group {
+    border: 1px solid rgba(0,0,0,.12);
+    flex: 1 0 auto;
+    flex-direction: column;
+    position: relative;
+    border-radius: 2px;
+    padding: 28px 16px 8px;
+    margin: 16px 0;
+  }
+  
+  .group h2 {
+    background: #ffffff;
+    color: rgba(0,0,0,.54);
+    position: absolute;
+    top: -15px;
+    left: 8px;
+    margin: 0;
+    padding: 0 8px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  a {
+    color: #3f51b5;
+    text-decoration: none;
+  }
+  
+  .shadow-depth-1 {
+    box-shadow: 0 1px 5px 0 rgba(0,0,0.14), 0 1px 5px 0 rgba(0,0,0,.12), 0 3px 1px -2px rgba(0,0,0,.2);
+  }
+  
+  .header-height {
+    height: 40px;
+  }
+  
+  .float{
+      position:fixed;
+      bottom:40px;
+      right:40px;
+  }
+  
