@@ -30,7 +30,9 @@ public class Startup
 
         services
             .AddLogging()
+#if !DEBUG
             .AddHostedService<ConsoleGuiHostedService>()
+#endif
             .AddHostedService<InitAppSettingsHostedService>()
             .AddLiteDbContext()
             .AddYandexClient(_configuration, YANDEX_CLIENT_CONFIGURATION_KEY)
@@ -42,10 +44,16 @@ public class Startup
 #if !DEBUG
         ConfigureEmbeddedAssets(app);
 #endif
-        app.UseRouting().UseEndpoints(endpoints =>
-        {
-            endpoints.MapDefaultControllerRoute();
-        });
+        app
+            .UseCors(builder =>
+            {
+                builder.AllowAnyOrigin().AllowAnyHeader();
+            })
+            .UseRouting()
+            .UseEndpoints(endpoints =>
+            {
+                endpoints.MapDefaultControllerRoute();
+            });
     }
 
 #pragma warning disable IDE0051 // Remove unused private members

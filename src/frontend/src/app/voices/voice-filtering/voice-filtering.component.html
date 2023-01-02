@@ -1,0 +1,17 @@
+<div class="group">
+  <h2>Filtering</h2>
+  <form [formGroup]="filterForm" novalidate class="grid" style="margin: 0;">
+    <div class="col-6">
+      <mat-form-field>
+        <mat-label>Text</mat-label>
+        <input matInput formControlName="text">
+      </mat-form-field>
+    </div>
+    <div class="col-6">
+      <mat-form-field>
+        <mat-label>Transcription</mat-label>
+        <input matInput formControlName="transcription">
+      </mat-form-field>
+    </div>
+  </form>
+</div>

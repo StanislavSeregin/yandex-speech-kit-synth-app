@@ -1,0 +1,5 @@
+<h2>Do you want to remove pronunciation?</h2>
+<div mat-dialog-actions align="end">
+  <button mat-raised-button (click)="close()" [disabled]="isLoading">Cancel</button>
+  <button mat-raised-button color="warn" (click)="remove()" [disabled]="isLoading">Remove</button>
+</div>

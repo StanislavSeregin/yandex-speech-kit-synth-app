@@ -3,9 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { environment } from './../../environments/environment';
 
-const speechListUrl = `${environment}api/speech/get-list`;
-const createOrUpdateSpeechUrl = `${environment}api/speech/create-or-update`;
-const removeSpeechUrl = `${environment}api/speech/remove`;
+const speechListUrl = `${environment.baseUrl}api/speech/get-list`;
+const createOrUpdateSpeechUrl = `${environment.baseUrl}api/speech/create-or-update`;
+const removeSpeechUrl = `${environment.baseUrl}api/speech/remove`;
 
 export type SpeechModel = {
   text?: string | null,

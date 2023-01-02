@@ -1,0 +1,50 @@
+<div class="group">
+  <h2>Contents</h2>
+  <table mat-table [dataSource]="data" matSort [matSortDisabled]="isLoading">
+    <ng-container matColumnDef="text">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Text</th>
+      <td mat-cell *matCellDef="let row">
+        <span>{{row.text}}</span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="transcription">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Transcription</th>
+      <td mat-cell *matCellDef="let row">
+        <span>{{row.transcription}}</span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Created at</th>
+      <td mat-cell *matCellDef="let row">
+        <span>{{row.createdAt | date}}</span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="updatedAt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Updated at</th>
+      <td mat-cell *matCellDef="let row">
+        <span>{{row.updatedAt | date}}</span>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-icon-button color="primary" (click)="openEditor(row)">
+          <mat-icon>launch</mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="playVoice(row)">
+          <mat-icon>play_arrow</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="openRemoveDialog(row)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="6">
+        <b class="grid-center">No records found...</b>
+      </td>
+    </tr>
+  </table>
+</div>
