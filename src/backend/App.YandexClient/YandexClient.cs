@@ -30,15 +30,13 @@ internal class YandexClient : IYandexClient
             Speaker = Speaker.Alyss
         };
 
-        using var textToSpechResult = await _speechKitClient.TextToSpeechAsync(
+        var textToSpechResult = await _speechKitClient.TextToSpeechAsync(
             options,
             cancellationToken);
 
         var isFailed = textToSpechResult is
-        {
-            TransportStatus: not TransportStatus.Ok,
-            ResponseCode: not HttpStatusCode.OK
-        };
+        { TransportStatus: not TransportStatus.Ok } or
+        { ResponseCode: not HttpStatusCode.OK };
 
         if (isFailed)
         {

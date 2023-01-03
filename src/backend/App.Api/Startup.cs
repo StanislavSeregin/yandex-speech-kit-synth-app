@@ -70,7 +70,10 @@ public class Startup
         };
 
         app.UseSpaStaticFiles(staticFileOptions);
-        app.UseSpa(spaBuilder => spaBuilder.Options.DefaultPageStaticFileOptions = staticFileOptions);
+        app.UseSpa(spaBuilder =>
+        {
+            spaBuilder.Options.DefaultPageStaticFileOptions = staticFileOptions;
+        });
     }
 #pragma warning restore IDE0051 // Remove unused private members
 }
