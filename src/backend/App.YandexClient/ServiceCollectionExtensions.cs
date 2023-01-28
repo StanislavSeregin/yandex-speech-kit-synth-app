@@ -1,8 +1,7 @@
-﻿using ITCC.YandexSpeechKitClient;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using System;
+using System.Net.Http.Headers;
 
 namespace App.YandexClient;
 
@@ -13,22 +12,18 @@ public static class ServiceCollectionExtensions
         IConfiguration configuration,
         string configurationKey)
     {
-        services.Configure<YandexClientConfiguration>(configuration.GetSection(configurationKey));
-        return services
-            .AddScoped(SpeechKitClientFactory)
-            .AddScoped<IYandexClient, YandexClient>();
-    }
+        var settingsSection = configuration.GetSection(configurationKey);
+        services.Configure<YandexClientConfiguration>(settingsSection);
+        services.AddHttpClient<YandexClient>(httpClient =>
+        {
+            var yandexClientConfiguration = new YandexClientConfiguration();
+            settingsSection.Bind(yandexClientConfiguration);
+            httpClient.BaseAddress = new Uri(yandexClientConfiguration.YandexUrl);
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(
+                "Api-Key",
+                yandexClientConfiguration.ApiKey);
+        });
 
-    private static SpeechKitClient SpeechKitClientFactory(IServiceProvider sp)
-    {
-        var yandexClientConfigurationOptionsSnapshot = sp.GetRequiredService<IOptionsSnapshot<YandexClientConfiguration>>();
-        var yandexClientConfiguration = yandexClientConfigurationOptionsSnapshot.Value;
-        var speechKitClientOptions = new SpeechKitClientOptions(
-            yandexClientConfiguration.ApiKey,
-            yandexClientConfiguration.ApplicationName,
-            yandexClientConfiguration.UserId,
-            yandexClientConfiguration.Device);
-
-        return new SpeechKitClient(speechKitClientOptions);
+        return services.AddScoped<IYandexClient, YandexClient>();
     }
 }

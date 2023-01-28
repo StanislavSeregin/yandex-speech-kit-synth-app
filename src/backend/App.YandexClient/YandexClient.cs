@@ -1,8 +1,7 @@
-﻿using ITCC.YandexSpeechKitClient;
-using ITCC.YandexSpeechKitClient.Enums;
-using System;
+﻿using Microsoft.Extensions.Options;
 using System.IO;
-using System.Net;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,41 +9,38 @@ namespace App.YandexClient;
 
 internal class YandexClient : IYandexClient
 {
-    private readonly SpeechKitClient _speechKitClient;
+    private readonly HttpClient _httpClient;
+    private readonly YandexClientConfiguration _yandexClientConfiguration;
 
-    public YandexClient(SpeechKitClient speechKitClient)
+    public YandexClient(
+        HttpClient httpClient,
+        IOptionsSnapshot<YandexClientConfiguration> yandexClientConfigurationOptionsSnapshot)
     {
-        _speechKitClient = speechKitClient;
+        _httpClient = httpClient;
+        _yandexClientConfiguration = yandexClientConfigurationOptionsSnapshot.Value;
     }
 
     public async Task<Stream> TextToSpeechInRussian(
         string text,
         CancellationToken cancellationToken)
     {
-        var options = new SynthesisOptions(text)
-        {
-            AudioFormat = SynthesisAudioFormat.Wav,
-            Language = SynthesisLanguage.Russian,
-            Emotion = Emotion.Neutral,
-            Quality = SynthesisQuality.High,
-            Speaker = Speaker.Alyss
-        };
+        var textToSpeechRequest = new TextToSpeechRequest(
+            text,
+            null,
+            "ru-RU",
+            "alena",
+            "neutral",
+            "1.0",
+            "oggopus",
+            "48000",
+            null);
 
-        var textToSpechResult = await _speechKitClient.TextToSpeechAsync(
-            options,
+        var response = await _httpClient.PostAsJsonAsync(
+            "/speech/v1/tts:synthesize",
+            textToSpeechRequest,
             cancellationToken);
 
-        var isFailed = textToSpechResult is
-        { TransportStatus: not TransportStatus.Ok } or
-        { ResponseCode: not HttpStatusCode.OK };
-
-        if (isFailed)
-        {
-            textToSpechResult.Dispose();
-            throw new Exception(
-                $"Yandex response error: {nameof(TransportStatus)} is {textToSpechResult.TransportStatus}, {nameof(ResponseCode)} is {textToSpechResult.TransportStatus}");
-        }
-
-        return textToSpechResult.Result;
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadAsStreamAsync(cancellationToken);
     }
 }
