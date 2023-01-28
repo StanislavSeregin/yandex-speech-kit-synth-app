@@ -25,7 +25,7 @@ public class SpeechController : ControllerBase
     {
         var request = new GettingFileFeature.Request(fileId);
         var response = await _mediator.Send(request, cancellationToken);
-        return File(response.Stream, "audio/wav");
+        return File(response.Stream, "audio/ogg");
     }
 
     [HttpPost("get-list")]

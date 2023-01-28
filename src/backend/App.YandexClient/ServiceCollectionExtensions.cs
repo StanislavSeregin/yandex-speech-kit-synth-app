@@ -14,7 +14,7 @@ public static class ServiceCollectionExtensions
     {
         var settingsSection = configuration.GetSection(configurationKey);
         services.Configure<YandexClientConfiguration>(settingsSection);
-        services.AddHttpClient<YandexClient>(httpClient =>
+        services.AddHttpClient<IYandexClient, YandexClient>(httpClient =>
         {
             var yandexClientConfiguration = new YandexClientConfiguration();
             settingsSection.Bind(yandexClientConfiguration);
@@ -24,6 +24,6 @@ public static class ServiceCollectionExtensions
                 yandexClientConfiguration.ApiKey);
         });
 
-        return services.AddScoped<IYandexClient, YandexClient>();
+        return services;
     }
 }

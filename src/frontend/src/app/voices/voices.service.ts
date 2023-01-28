@@ -110,7 +110,7 @@ export class VoicesService {
   public getSpeechUrl(
     fileId: string
   ): string {
-    return `${environment.baseUrl}api/speech/file?${fileId}`;
+    return `${environment.baseUrl}api/speech/file?fileId=${fileId}`;
   }
 
   public async save(

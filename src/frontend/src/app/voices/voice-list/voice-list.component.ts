@@ -108,8 +108,8 @@ export class VoiceListComponent implements OnInit, AfterViewInit, OnDestroy {
   public async playVoice(
     voice: SpeechModel
   ): Promise<void> {
-    if (voice.text) {
-      const voiceUrl = this.voicesService.getSpeechUrl(voice.text);
+    if (voice.fileId) {
+      const voiceUrl = this.voicesService.getSpeechUrl(voice.fileId);
       const audio = new Audio(voiceUrl);
       audio.play();
     }
