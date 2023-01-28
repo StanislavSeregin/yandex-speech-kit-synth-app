@@ -41,9 +41,6 @@ public class Startup
 
     public void Configure(IApplicationBuilder app)
     {
-#if !DEBUG
-        ConfigureEmbeddedAssets(app);
-#endif
         app
             .UseCors(builder =>
             {
@@ -54,6 +51,10 @@ public class Startup
             {
                 endpoints.MapDefaultControllerRoute();
             });
+
+#if !DEBUG
+        ConfigureEmbeddedAssets(app);
+#endif
     }
 
 #pragma warning disable IDE0051 // Remove unused private members

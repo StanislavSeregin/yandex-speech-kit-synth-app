@@ -25,7 +25,7 @@ ARG RUNTIME=win-x64
 COPY src/backend/ .
 WORKDIR /src/App.Api
 COPY --from=web-build /src/dist ./wwwroot/
-RUN dotnet publish -c release -o /app -r $RUNTIME -p:PublishSingleFile=true -p:PublishTrimmed=true -p:PublishReadyToRun=true --self-contained true --no-restore
+RUN dotnet publish -c release -o /app -r $RUNTIME -p:PublishSingleFile=true -p:PublishReadyToRun=true --self-contained true --no-restore
 
 # Copy compiled app to local folder
 FROM scratch AS export-stage

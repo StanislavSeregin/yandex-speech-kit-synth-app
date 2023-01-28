@@ -1,7 +1,5 @@
 ﻿using LiteDB;
 using System;
-using System.IO;
-using System.Reflection;
 
 namespace App.Data;
 
@@ -11,10 +9,7 @@ internal class LiteDbContext : ILiteDbContext, IDisposable
 
     public LiteDbContext()
     {
-        var executingAssemblyPath = Assembly.GetExecutingAssembly().Location;
-        var currentLocation = Path.GetDirectoryName(executingAssemblyPath);
-        var dbPath = Path.Combine(currentLocation, "data.db");
-        _liteDatabase = new LiteDatabase(dbPath);
+        _liteDatabase = new LiteDatabase("./data.db");
     }
 
     public ILiteCollection<T> GetCollection<T>()
