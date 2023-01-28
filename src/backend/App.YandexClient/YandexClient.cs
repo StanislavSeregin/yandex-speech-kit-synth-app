@@ -40,6 +40,7 @@ internal class YandexClient : IYandexClient
 
         if (isFailed)
         {
+            textToSpechResult.Dispose();
             throw new Exception(
                 $"Yandex response error: {nameof(TransportStatus)} is {textToSpechResult.TransportStatus}, {nameof(ResponseCode)} is {textToSpechResult.TransportStatus}");
         }

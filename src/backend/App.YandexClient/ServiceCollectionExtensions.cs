@@ -21,8 +21,8 @@ public static class ServiceCollectionExtensions
 
     private static SpeechKitClient SpeechKitClientFactory(IServiceProvider sp)
     {
-        var yandexClientConfigurationOptions = sp.GetRequiredService<IOptions<YandexClientConfiguration>>();
-        var yandexClientConfiguration = yandexClientConfigurationOptions.Value;
+        var yandexClientConfigurationOptionsSnapshot = sp.GetRequiredService<IOptionsSnapshot<YandexClientConfiguration>>();
+        var yandexClientConfiguration = yandexClientConfigurationOptionsSnapshot.Value;
         var speechKitClientOptions = new SpeechKitClientOptions(
             yandexClientConfiguration.ApiKey,
             yandexClientConfiguration.ApplicationName,
